@@ -49,17 +49,26 @@ bool egalite(int tab1[], int tab2[], int taille) {
 
 bool egalitePtr(int* tab1, int* tab2, int taille)
 {
+    try {
+        bool status = true;
+        int length = sizeof(tab1) / sizeof(tab1[0]);
+        
 
-    bool status = true;
+        for (int i = 0; i < length; i++) {
+            if (*tab1 != *tab2) {
+                status = false;
+            }
 
-    while (tab1 < tab1 + sizeof(tab1) / sizeof(tab1[0])) {
-        if (*tab1 != *tab2) {
-            status = false;
+            tab1++;
+            tab2++;
         }
-        ++tab1;
-        ++tab2;
+        
+        return status;
     }
-    return status;
+    catch (const std::exception& ex) {
+        cerr << ex.what();
+      
+    }
 }
 
 
@@ -72,6 +81,7 @@ int main()
     int tableau1[] = { 22, 44, 12, 61, 4, 99, 33, 17, 15, 123 };
     int tableau2[] = { 22, 33, 44, 61, 4, 99, 12, 17, 123, 15 };
     int tableau3[] = { 22, 44, 12, 61, 4, 99, 33, 17, 15, 123 };
+   
 
     trierTab(tableau1, NB_ELEMENTS);
 
@@ -82,6 +92,7 @@ int main()
     cout << boolStr;
     string boolStr2 = egalitePtr(tableau1, tableau2, NB_ELEMENTS) ? "true" : "false";
     cout << boolStr2;
+    
 }
 
 
